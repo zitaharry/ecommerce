@@ -76,6 +76,7 @@ export type Product = {
   _updatedAt: string;
   _rev: string;
   name?: string;
+  slug?: Slug;
   image?: {
     asset?: {
       _ref: string;
@@ -218,8 +219,37 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Sale | Order | Category | Product | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes =
+  | Sale
+  | Order
+  | Category
+  | Product
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageHotspot
+  | SanityImageCrop
+  | SanityFileAsset
+  | SanityImageAsset
+  | SanityImageMetadata
+  | Geopoint
+  | Slug
+  | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./sanity/lib/products/getAllCategories.ts
+// Variable: ALL_CATEGORIES_QUERY
+// Query: *[_type == "category"]  | order(name asc)
+export type ALL_CATEGORIES_QUERYResult = Array<{
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: string;
+}>;
+
 // Source: ./sanity/lib/products/getAllProducts.ts
 // Variable: ALL_PRODUCTS_QUERY
 // Query: *[_type == "product"]  | order(name asc)
@@ -230,6 +260,7 @@ export type ALL_PRODUCTS_QUERYResult = Array<{
   _updatedAt: string;
   _rev: string;
   name?: string;
+  slug?: Slug;
   image?: {
     asset?: {
       _ref: string;
@@ -258,6 +289,7 @@ export type ALL_PRODUCTS_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "\n  *[_type == \"product\"]\n  | order(name asc)": ALL_PRODUCTS_QUERYResult;
+    '\n  *[_type == "category"]\n  | order(name asc)': ALL_CATEGORIES_QUERYResult;
+    '\n  *[_type == "product"]\n  | order(name asc)': ALL_PRODUCTS_QUERYResult;
   }
 }
