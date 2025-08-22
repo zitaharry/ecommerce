@@ -1,7 +1,7 @@
-export default function Home() {
-  return (
-    <div>
-      <h1>Hello World!</h1>
-    </div>
-  );
+import { getAllProducts } from "@/sanity/lib/products/getAllProducts";
+
+export default async function Home() {
+  const products = await getAllProducts();
+
+  return <div>{/*  Render all the products  */}</div>;
 }
