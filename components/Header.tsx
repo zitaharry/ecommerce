@@ -31,7 +31,10 @@ const Header = () => {
           href="/"
           className="text-2xl font-bold text-blue-500 hover:opacity-50 cursor-pointer mx-auto sm:mx-0"
         >
-          Shopr
+          JAPE{" "}
+          <span className="text-2xl font-bold text-red-500 hover:opacity-50 cursor-pointer mx-auto sm:mx-0">
+            Holdings
+          </span>
         </Link>
 
         <Form
