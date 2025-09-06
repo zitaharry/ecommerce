@@ -7,6 +7,9 @@ import { PortableText } from "next-sanity";
 import { Button } from "@/components/ui/button";
 import AddToBasketButton from "@/components/AddToBasketButton";
 
+export const dynamic = "force-static";
+export const revalidate = 60; // revalidate at most every 60 seconds
+
 const ProductPage = async ({
   params,
 }: {
@@ -14,6 +17,11 @@ const ProductPage = async ({
 }) => {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
+
+  console.log(
+    crypto.randomUUID().slice(0, 5) +
+      `>>> Rerendered the product page cache for ${slug}`,
+  );
 
   if (!product) {
     return notFound();
@@ -54,7 +62,6 @@ const ProductPage = async ({
               )}
             </div>
           </div>
-
 
           <div className="mt-6">
             <AddToBasketButton product={product} disabled={isOutOfStock} />
